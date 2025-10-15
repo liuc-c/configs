@@ -9,7 +9,6 @@
     "wight": "#FFFFFF",
     "text": "#494D64",
     "node_green": "#7ECA9C",
-    "bun_cream": "#FBF0DF",
     "time_green": "#A6DA95",
     "sys_info": "#A9FFB4",
     "mem_info": "#94FFA2"
@@ -84,18 +83,6 @@
           "type": "node"
         },
         {
-          "background": "p:bun_cream",
-          "foreground": "p:text",
-          "powerline_symbol": "\ue0b4",
-          "style": "powerline",
-          "properties": {
-            "display_mode": "files",
-            "home_enabled": false
-          },
-          "template": " \ue6a2 {{ .Full }} ",
-          "type": "bun"
-        },
-        {
           "background": "p:time_green",
           "foreground": "p:text",
           "properties": {
@@ -152,6 +139,12 @@
           "foreground": "p:blue",
           "style": "plain",
           "template": "\u2570\u2500",
+          "type": "text"
+        },
+        {
+          "foreground": "p:blue",
+          "style": "plain",
+          "template": " {{ if .Root }}#{{else}}${{end}}",
           "type": "text"
         }
       ],
