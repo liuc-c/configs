@@ -3,10 +3,13 @@
     "os": "#ACB0BE",
     "pink": "#F5BDE6",
     "lavender": "#B7BDF8",
+    "lavender_modified": "#EED49F",
+    "lavender_ahead": "#A6DA95",
     "blue": "#8AADF4",
     "wight": "#FFFFFF",
     "text": "#494D64",
     "node_green": "#7ECA9C",
+    "bun_cream": "#FBF0DF",
     "time_green": "#A6DA95",
     "sys_info": "#A9FFB4",
     "mem_info": "#94FFA2"
@@ -38,7 +41,8 @@
           "properties": {
             "folder_icon": "..\ue5fe..",
             "home_icon": "~",
-            "style": "agnoster_short"
+            "style": "agnoster_short",
+            "max_depth": 3
           },
           "powerline_symbol": "\ue0b4",
           "style": "powerline",
@@ -47,14 +51,20 @@
         },
         {
           "background": "p:lavender",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:lavender_modified{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:lavender_modified{{ end }}",
+            "{{ if gt .Ahead 0 }}p:lavender_ahead{{ end }}"
+          ],
           "foreground": "p:text",
           "style": "powerline",
           "properties": {
             "branch_icon": "\ue725 ",
+            "fetch_status": true,
+            "fetch_upstream_icon": true,
+            "fetch_worktree_count": true,
             "cherry_pick_icon": "\ue29b ",
             "commit_icon": "\uf417 ",
-            "fetch_status": false,
-            "fetch_upstream_icon": true,
             "merge_icon": "\ue727 ",
             "no_commits_icon": "\uf0c3 ",
             "rebase_icon": "\ue728 ",
@@ -62,7 +72,7 @@
             "tag_icon": "\uf412 "
           },
           "powerline_symbol": "\ue0b4",
-          "template": " {{ .UpstreamIcon }} {{ .HEAD }}",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ if gt .Working.Untracked 0 }}+{{ .Working.Untracked }} {{ end }}{{ if gt .Working.Modified 0 }}~{{ .Working.Modified }} {{ end }}{{ if gt .Working.Deleted 0 }}-{{ .Working.Deleted }} {{ end }}{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
           "type": "git"
         },
         {
@@ -72,6 +82,18 @@
           "style": "powerline",
           "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
           "type": "node"
+        },
+        {
+          "background": "p:bun_cream",
+          "foreground": "p:text",
+          "powerline_symbol": "\ue0b4",
+          "style": "powerline",
+          "properties": {
+            "display_mode": "files",
+            "home_enabled": false
+          },
+          "template": " \ue6a2 {{ .Full }} ",
+          "type": "bun"
         },
         {
           "background": "p:time_green",
@@ -136,6 +158,15 @@
       "type": "prompt"
     }
   ],
+  "console_title_template": "{{ .Folder }}{{ if .Root }} (Admin){{ end }}",
+  "transient_prompt": {
+    "background": "transparent",
+    "foreground": "p:time_green",
+    "foreground_templates": [
+      "{{ if gt .Code 0 }}p:root_red{{ end }}"
+    ],
+    "template": "\u276f "
+  },
   "final_space": true,
   "version": 2
 }
