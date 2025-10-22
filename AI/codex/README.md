@@ -40,7 +40,7 @@ type = "stdio"
 
 [mcp_servers.mcp-router.env]
 MCPR_TOKEN = "你的MCPR_TOKEN"
-SystemRoot = 'C:\\Windows'
+SystemRoot = "C:\\Windows"
 ```
 
 **⚠️ 转换要点：**
