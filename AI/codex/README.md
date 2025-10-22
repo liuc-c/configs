@@ -34,12 +34,13 @@ Codex 使用 `config.toml` 文件进行配置。将上述标准配置转换为 C
 
 ```toml
 [mcp_servers.mcp-router]
-command = "cmd"
 args = ["/c", "npx", "-y", "@mcp_router/cli@latest", "connect"]
+command = "cmd"
+type = "stdio"
 
 [mcp_servers.mcp-router.env]
 MCPR_TOKEN = "你的MCPR_TOKEN"
-SystemRoot = "C:\\Windows"
+SystemRoot = 'C:\\Windows'
 ```
 
 **⚠️ 转换要点：**
