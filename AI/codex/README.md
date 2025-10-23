@@ -28,6 +28,12 @@
 }
 ```
 
+### Codex 自动批转
+
+``` sh
+codex --dangerously-bypass-approvals-and-sandbox
+```
+
 ### Windows 下 Codex 的 MCP 配置转换
 
 Codex 使用 `config.toml` 文件进行配置。将上述标准配置转换为 Codex 配置如下：
@@ -37,6 +43,7 @@ Codex 使用 `config.toml` 文件进行配置。将上述标准配置转换为 C
 args = ["/c", "npx", "-y", "@mcp_router/cli@latest", "connect"]
 command = "cmd"
 type = "stdio"
+startup_timeout_ms = 60_000
 
 [mcp_servers.mcp-router.env]
 MCPR_TOKEN = "你的MCPR_TOKEN"
